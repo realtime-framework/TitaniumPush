@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <id>co.realtime.UniversalPush</id>
+    <name>UniversalPush</name>
+    <version>1.0</version>
+    <publisher>jcaixinha</publisher>
+    <url>http://</url>
+    <description/>
+    <copyright>2015 by jcaixinha</copyright>
+    <icon>appicon.png</icon>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>99f4895c-a07b-40d0-9bf9-a52c41640058</guid>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
+    <ios>
+        <plist>
+            <dict>
+                <key>UISupportedInterfaceOrientations~iphone</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                </array>
+                <key>UISupportedInterfaceOrientations~ipad</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+                    <string>UIInterfaceOrientationLandscapeLeft</string>
+                    <string>UIInterfaceOrientationLandscapeRight</string>
+                </array>
+                <key>UIRequiresPersistentWiFi</key>
+                <false/>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+                <key>UIStatusBarHidden</key>
+                <false/>
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleDefault</string>
+            </dict>
+        </plist>
+    </ios>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <resources>
+            <style name="Theme.NoActionBar" parent="@style/Theme.AppCompat">
+                <item name="windowActionBar">false</item>
+                <item name="android:windowNoTitle">true</item>
+            </style>
+            <style name="Theme.YesActionBar" parent="@style/Theme.AppCompat">
+                <item name="windowActionBar">true</item>
+                <item name="android:windowNoTitle">false</item>
+            </style>
+        </resources>
+        <manifest>
+            <permission
+                android:name="co.realtime.UniversalPush.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+            <uses-permission android:name="co.realtime.UniversalPush.permission.C2D_MESSAGE"/>
+            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+            <uses-permission
+                android:name="android.permission.GET_TASKS"/> //detect if app is running from service
+            <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+            <uses-permission android:name="android.permission.WAKE_LOCK"/>
+            <permission android:name="com.exalture.test.withPermission"/>
+            <uses-permission android:name="com.exalture.test.withPermission"/>
+            <application android:debuggable="true">
+                <activities>
+                    <activity url="app.js">
+                        <intent-filter>
+                            <action android:name="android.intent.action.VIEW"/>
+                            <category android:name="android.intent.category.DEFAULT"/>
+                            <category android:name="android.intent.category.BROWSABLE"/>
+                        </intent-filter>
+                    </activity>
+                </activities>
+                <service android:name="co.realtime.ortc.BackgroundService"/>
+                <service android:name="ibt.ortc.extensibility.GcmOrtcIntentService"/>
+                <receiver
+                    android:name="ibt.ortc.extensibility.GcmOrtcBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+                    <intent-filter>
+                        <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                        <category android:name="co.realtime.UniversalPush"/>
+                    </intent-filter>
+                    <intent-filter>
+                        <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                        <category android:name="co.realtime.UniversalPush"/>
+                        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                    </intent-filter>
+                </receiver>
+            </application>
+        </manifest>
+    </android>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="android" version="1.12">co.realtime.ortc</module>
+        <module platform="iphone" version="1.6">co.realtime.ortc</module>
+        <module platform="iphone">ti.map</module>
+        <module platform="android">ti.map</module>
+    </modules>
+    <deployment-targets>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+        <target device="ipad">false</target>
+        <target device="iphone">true</target>
+        <target device="mobileweb">false</target>
+    </deployment-targets>
+    <sdk-version>3.5.1.GA</sdk-version>
+</ti:app>

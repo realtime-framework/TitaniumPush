@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.6
+apiversion: 2
+description: This module allows to integrate ORTC service with Titanium Mobile applications.
+author: ortc@realtime.co
+license: Specify your license
+copyright: RealTime.co
+
+
+# these should not be edited
+name: ORTC
+moduleid: co.realtime.ortc
+guid: 9E0D6C19-2388-4F8B-82B6-949FBB826D87
+platform: iphone
+minsdk: 3.4.0.GA
